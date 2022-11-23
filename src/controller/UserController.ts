@@ -6,21 +6,21 @@ export class UserController {
 
       public signup = async (req: Request, res: Response) => {
         try {
-          const { userName, name, password } = req.body
+          const { name, cpf, password } = req.body
 
 // Os dados de signup usados nesse código são apenas o mínimo para teste. 
 // Futuramente mais dados do usuário serão adicionados.
 
           const input: userSignUpDTO = {
             name,
-            userName,
+            cpf,
             password
           }
 
           const userBusiness = new UserBusiness()
-          const token = await userBusiness.createUser(input);
+          await userBusiness.createUser(input);
     
-          res.status(201).send({ message: "Usuário criado!", token });
+          res.status(201).send({ message: "Usuário criado!" });
         } catch (error: any) {
           res.status(400).send(error.message);
         }
@@ -29,17 +29,18 @@ export class UserController {
 
       public login = async (req: Request, res: Response) => {
         try {
-          const { userName, password } = req.body;
+          const { cpf, password } = req.body;
 
           const input: LoginInputDTO = {
-            userName,
+            cpf,
             password
           }
 
           const userBusiness = new UserBusiness()
-          const token = await userBusiness.login(input);
+          
+          await userBusiness.login(input);
     
-          res.status(200).send({ message: "Usuário logado!", token });
+          res.status(200).send({ message: "Usuário logado!"});
         } catch (error: any) {
           res.status(400).send(error.message);
         }
