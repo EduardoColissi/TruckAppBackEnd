@@ -52,11 +52,11 @@ export class UserBusiness {
         throw new CustomError(400, "Usuário já existe.")
       }
 
-      const userId: string = idGenerator.generateId()
+      const id: string = idGenerator.generateId()
       const passwordHash: string = await hashManager.hashGenerator(password)
 
       const user: userSignUp = {
-        userId,
+        id,
         cpf,
         name,
         password: passwordHash

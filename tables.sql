@@ -1,10 +1,10 @@
 -- Active: 1668782086461@@127.0.0.1@3306@truckapp_web
 
 CREATE TABLE IF NOT EXISTS users_web (
-    user_id VARCHAR(64) PRIMARY KEY,
+    id VARCHAR(64) PRIMARY KEY UNIQUE,
     name VARCHAR(64) NOT NULL,
-    password VARCHAR(64) NOT NULL,
-    cpf VARCHAR(64) NOT NULL
+    cpf VARCHAR(64) NOT NULL,
+    password VARCHAR(64) NOT NULL
 );
 
 

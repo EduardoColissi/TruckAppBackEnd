@@ -39,7 +39,7 @@ export class UserDatabase extends BaseDatabase {
 
       await UserDatabase.connection
         .insert({
-          user_id: user.userId,
+          id: user.id,
           name: user.name,
           cpf: user.cpf,
           password: user.password

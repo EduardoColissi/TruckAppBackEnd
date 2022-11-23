@@ -8,7 +8,7 @@ export type userSignUp = {
    cpf: string
    name: string
    password: string
-   userId: string
+   id: string
 }
 
 export interface LoginInputDTO {
