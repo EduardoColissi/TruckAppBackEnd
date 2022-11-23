@@ -4,7 +4,7 @@ import { BaseDatabase } from "./BaseDatabase";
 
 export class UserDatabase extends BaseDatabase {
 
-  private static TABLE_NAME = "users_web";
+  private static TABLE_NAME = "users";
 
   public findUserByUserName = async (userName: string) => {
     try {
