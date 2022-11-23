@@ -1,9 +1,10 @@
 import { UserDatabase } from "../data/UserDatabase";
-import { CustomError, InvalidName, InvalidPassword, InvalidSignUpUserName, UserNotFound } from "../error/customError";
+import { CustomError, InvalidName, InvalidPassword, UserNotFound } from "../error/customError";
 import { LoginInputDTO, userSignUp, userSignUpDTO } from "../model/user";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenGenerator } from "../services/TokenGenerator";
 import { HashManager } from "../services/HashManager";
+import {isCPForCNPJ} from "js-cpf-cnpj-validation"
 
 const idGenerator = new IdGenerator()
 const tokenGenerator = new TokenGenerator()
@@ -12,11 +13,11 @@ const hashManager = new HashManager()
 
 
 export class UserBusiness {
-  public createUser = async (input: userSignUpDTO): Promise<string> => {
+  public createUser = async (input: userSignUpDTO): Promise<void> => {
     try {
-      const { name, userName, password } = input;
+      const { name, cpf, password } = input;
 
-      if ( !name || !userName || !password) {
+      if ( !name || !cpf || !password) {
         throw new CustomError( 
           400,
           'Preencha os campos "Nome","Usuário" e "Senha".'
@@ -33,51 +34,54 @@ export class UserBusiness {
         throw new InvalidName();
       }
 
-      if (userName.length < 4) {
-        throw new InvalidSignUpUserName()
+      console.log(cpf)
+
+      if (!isCPForCNPJ(cpf)) {
+        throw new CustomError(
+          400,
+          "CPF inválido."
+        )
       }
 
       if (password.length < 6) {
         throw new InvalidPassword()
       }
 
-      const checkIfNameAlreadyExists = await userDatabase.findUserByName(userName)
+      const checkIfNameAlreadyExists = await userDatabase.findUserByCPF(cpf)
       if (checkIfNameAlreadyExists) {
         throw new CustomError(400, "Usuário já existe.")
       }
 
-      const userId: string = idGenerator.generateId()
+      const id: string = idGenerator.generateId()
       const passwordHash: string = await hashManager.hashGenerator(password)
 
       const user: userSignUp = {
-        userId,
-        userName,
+        id,
+        cpf,
         name,
         password: passwordHash
       }
 
       await userDatabase.signUp(user);
-      const token = tokenGenerator.generateToken(userId)
 
-      return token
     } catch (error: any) {
       throw new CustomError(400, error.message);
     }
   }
 
 
-  public login = async (input: LoginInputDTO): Promise<string> => {
+  public login = async (input: LoginInputDTO): Promise<void> => {
     try {
-      const { userName, password } = input;
+      const { cpf, password } = input;
     
-      if (!userName || !password) {
+      if (!cpf || !password) {
         throw new CustomError(
           400,
           'Preencha os campos "Usuário" e "Senha".'
         );
       }
 
-      const user = await userDatabase.findUserByUserName(userName);
+      const user = await userDatabase.findUserByCPF(cpf);
 
       if (!user) {
         throw new UserNotFound()
@@ -89,9 +93,8 @@ export class UserBusiness {
         throw new InvalidPassword()
       }
 
-      const token = tokenGenerator.generateToken(user.id)
+      await userDatabase.findUserByCPF(user.cpf)
 
-      return token
     } catch (error: any) {
       throw new CustomError(400, error.message);
     }
