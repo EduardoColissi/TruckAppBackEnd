@@ -55,14 +55,14 @@ export class UserBusiness {
       const id: string = idGenerator.generateId()
       const passwordHash: string = await hashManager.hashGenerator(password)
 
-      const user: userSignUp = {
+      const userData: userSignUp = {
         id,
         cpf,
         name,
         password: passwordHash
       }
 
-      await userDatabase.signUp(user);
+      await userDatabase.signUp(userData);
 
     } catch (error: any) {
       throw new CustomError(400, error.message);
