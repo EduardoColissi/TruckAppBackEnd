@@ -5,7 +5,7 @@ import { IdGenerator } from "../services/IdGenerator";
 const idGenerator = new IdGenerator()
 
 export class ShippingBusiness {
-    public createShipping = async (input: ShippingInputDTO) => {
+    public createShipping = async (input: ShippingInputDTO): Promise<void> => {
         try {
         if (!input.title || !input.descricao || !input.valor || !input.prazo || !input.destino || !input.origem || !input.pontuacao) {
             throw new Error("Preencha todos os campos");
@@ -27,8 +27,21 @@ export class ShippingBusiness {
     
         const shippingDatabase = new ShippingDatabase();
         await shippingDatabase.createShipping(shippingData);
+
         } catch (error: any) {
         throw new Error(error.message);
         }
     };
+
+
+    public getShipping = async (): Promise<any> => {
+        try {
+            const shippingDatabase = new ShippingDatabase();
+            const result = await shippingDatabase.getShipping();
+            return result;
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
+    };
+
 }

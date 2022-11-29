@@ -23,4 +23,15 @@ export class ShippingDatabase extends BaseDatabase {
             throw new Error(error.message);
         }
     }
+
+    public async getShipping(): Promise<any> {
+        try {
+            const result = await ShippingDatabase.connection()
+                .select("*")
+                .from(ShippingDatabase.TABLE_NAME);
+            return result;
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
+    }
 }
