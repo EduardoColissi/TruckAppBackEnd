@@ -1,34 +1,34 @@
-import { ShippingInput, ShippingInputDTO } from "../model/shipping";
+import { FreightInput } from "../model/freights";
 import { BaseDatabase } from "./BaseDatabase";
 
 
-export class ShippingDatabase extends BaseDatabase {
-    private static TABLE_NAME = "shipping";
+export class FreightDatabase extends BaseDatabase {
+    private static TABLE_NAME = "freights";
 
-    public async createShipping(input: ShippingInput): Promise<void> {
+    public async createFreight(input: FreightInput): Promise<void> {
         try {
-            await ShippingDatabase.connection()
+            await FreightDatabase.connection(FreightDatabase.TABLE_NAME)
                 .insert({
                     id: input.id,
-                    title: input.title,
+                    titulo: input.titulo,
                     descricao: input.descricao,
                     valor: input.valor,
                     prazo: input.prazo,
                     destino: input.destino,
                     origem: input.origem,
                     pontuacao: input.pontuacao,
+                    data: input.data
                 })
-                .into(ShippingDatabase.TABLE_NAME);
         } catch (error: any) {
             throw new Error(error.message);
         }
     }
 
-    public async getShipping(): Promise<any> {
+    public async getFreight(): Promise<any> {
         try {
-            const result = await ShippingDatabase.connection()
+            const result = await FreightDatabase
+            .connection(FreightDatabase.TABLE_NAME)
                 .select("*")
-                .from(ShippingDatabase.TABLE_NAME);
             return result;
         } catch (error: any) {
             throw new Error(error.message);

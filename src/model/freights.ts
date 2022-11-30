@@ -1,20 +1,22 @@
-export type ShippingInputDTO = {
-    title: string
+export type FreightInputDTO = {
+    titulo: string
     descricao: string
     valor: string
     prazo: string
     destino: string
     origem: string
     pontuacao: string
+    data: string
 }
 
-export type ShippingInput = {
+export type FreightInput = {
     id: string
-    title: string
+    titulo: string
     descricao: string
     valor: string
     prazo: string
     destino: string
     origem: string
     pontuacao: string
+    data: string
 }

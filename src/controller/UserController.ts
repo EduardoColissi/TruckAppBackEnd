@@ -4,7 +4,7 @@ import { LoginInputDTO, userSignUpDTO } from "../model/user";
 
 export class UserController {
 
-      public signupAdmin = async (req: Request, res: Response) => {
+      public signup = async (req: Request, res: Response) => {
         try {
           const { name, cpf, password } = req.body
 
