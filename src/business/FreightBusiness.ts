@@ -45,4 +45,14 @@ export class FreightBusiness {
         }
     };
 
+
+    public deleteFreight = async (id: string): Promise<void> => {
+        try {
+            const freightDatabase = new FreightDatabase();
+            await freightDatabase.deleteFreight(id);
+        } catch (error: any) {
+            throw new Error(error.message || error.sqlMessage);
+        }
+    }  
+
 }

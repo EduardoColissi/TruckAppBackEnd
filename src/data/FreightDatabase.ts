@@ -34,4 +34,22 @@ export class FreightDatabase extends BaseDatabase {
             throw new Error(error.message);
         }
     }
+
+
+    public async deleteFreight(id: string): Promise<void> {
+        try {
+
+            const checkIfIdExists = await FreightDatabase.connection(FreightDatabase.TABLE_NAME)
+            .where({id})
+
+            if (!checkIfIdExists.length) {
+                throw new Error("Frete não encontrado");
+            }
+
+            await FreightDatabase.connection(FreightDatabase.TABLE_NAME)
+                .where({ id }).del()
+        } catch (error: any) {
+            throw new Error(error.sqlMessage || error.message);
+    }
+    }
 }

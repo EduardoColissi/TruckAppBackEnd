@@ -7,3 +7,4 @@ const freightController = new FreightController()
 
 freightRouter.post('/create', freightController.createFreight)
 freightRouter.get('/all', freightController.getFreights )
+freightRouter.delete('/delete/:id', freightController.deleteFreight )

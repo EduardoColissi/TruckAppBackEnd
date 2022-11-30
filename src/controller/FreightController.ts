@@ -25,6 +25,8 @@ export class FreightController {
     }
   };
 
+
+
   public getFreights = async (req: Request, res: Response) => {
     try {
       const freightBusiness = new FreightBusiness();
@@ -34,4 +36,19 @@ export class FreightController {
       res.status(400).send(error.message);
     }
   };
+
+
+
+  public deleteFreight = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+
+      const freightBusiness = new FreightBusiness();
+      await freightBusiness.deleteFreight(id);
+      res.status(200).send("O frete foi deletado.");
+    } catch (error: any) {
+      res.status(400).send("Este frete não existe.");
+    }
+  };
 }
+
