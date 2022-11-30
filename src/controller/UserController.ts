@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/UserBusiness";
-import { EditUserInputDTO, LoginInputDTO, userSignUpDTO } from "../model/user";
+import { LoginInputDTO, userSignUpDTO } from "../model/user";
 
 export class UserController {
 
-      public signup = async (req: Request, res: Response) => {
+      public signupAdmin = async (req: Request, res: Response) => {
         try {
           const { name, cpf, password } = req.body
 
@@ -24,7 +24,7 @@ export class UserController {
         } catch (error: any) {
           res.status(400).send(error.message);
         }
-      } 
+    }
 
 
       public login = async (req: Request, res: Response) => {
@@ -45,7 +45,4 @@ export class UserController {
           res.status(400).send(error.message);
         }
       }
-
-
-
 }
