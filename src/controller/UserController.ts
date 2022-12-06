@@ -38,9 +38,9 @@ export class UserController {
 
           const userBusiness = new UserBusiness()
           
-          await userBusiness.login(input);
+          const token = await userBusiness.login(input);
     
-          res.status(200).send({ message: "Usuário logado!"});
+          res.status(200).send({ message: "Usuário logado!", token: token});
         } catch (error: any) {
           res.status(400).send(error.message);
         }
