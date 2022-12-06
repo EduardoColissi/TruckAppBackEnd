@@ -28,6 +28,13 @@ export class UserBusiness {
         throw new InvalidName();
       }
 
+      // if (!cpf.includes("-") || !cpf.includes(".")) {
+      //   throw new CustomError(
+      //     400,
+      //     "Formato de CPF inválido."
+      //   )
+      // }
+
       const splitName = name.split("")
       
       if (splitName.includes("0") || splitName.includes("1") || splitName.includes("2") || splitName.includes("3") || splitName.includes("4") || splitName.includes("5") || splitName.includes("6") || splitName.includes("7") || splitName.includes("8") || splitName.includes("9")) {
@@ -55,14 +62,14 @@ export class UserBusiness {
       const id: string = idGenerator.generateId()
       const passwordHash: string = await hashManager.hashGenerator(password)
 
-      const user: userSignUp = {
+      const userData: userSignUp = {
         id,
         cpf,
         name,
         password: passwordHash
       }
 
-      await userDatabase.signUp(user);
+      await userDatabase.signUp(userData);
 
     } catch (error: any) {
       throw new CustomError(400, error.message);
@@ -70,7 +77,7 @@ export class UserBusiness {
   }
 
 
-  public login = async (input: LoginInputDTO): Promise<void> => {
+  public login = async (input: LoginInputDTO): Promise<string> => {
     try {
       const { cpf, password } = input;
     
@@ -81,6 +88,12 @@ export class UserBusiness {
         );
       }
 
+      // if (!cpf.includes("-") || !cpf.includes(".")) {
+      //   throw new CustomError(
+      //     400,
+      //     "Formato de CPF inválido."
+      //   )
+      // }
       const user = await userDatabase.findUserByCPF(cpf);
 
       if (!user) {
@@ -93,8 +106,9 @@ export class UserBusiness {
         throw new InvalidPassword()
       }
 
-      await userDatabase.findUserByCPF(user.cpf)
-
+      const token: string = tokenGenerator.generateToken(user.id);
+      
+      return token
     } catch (error: any) {
       throw new CustomError(400, error.message);
     }
