@@ -28,12 +28,12 @@ export class UserBusiness {
         throw new InvalidName();
       }
 
-      if (!cpf.includes("-") || !cpf.includes(".")) {
-        throw new CustomError(
-          400,
-          "Formato de CPF inválido."
-        )
-      }
+      // if (!cpf.includes("-") || !cpf.includes(".")) {
+      //   throw new CustomError(
+      //     400,
+      //     "Formato de CPF inválido."
+      //   )
+      // }
 
       const splitName = name.split("")
       
@@ -88,12 +88,12 @@ export class UserBusiness {
         );
       }
 
-      if (!cpf.includes("-") || !cpf.includes(".")) {
-        throw new CustomError(
-          400,
-          "Formato de CPF inválido."
-        )
-      }
+      // if (!cpf.includes("-") || !cpf.includes(".")) {
+      //   throw new CustomError(
+      //     400,
+      //     "Formato de CPF inválido."
+      //   )
+      // }
       const user = await userDatabase.findUserByCPF(cpf);
 
       if (!user) {
