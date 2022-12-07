@@ -1,8 +1,9 @@
 import { FreightDatabase } from "../data/FreightDatabase";
-import { FreightInputDTO } from "../model/freights";
+import { FreightInput, FreightInputDTO } from "../model/freights";
 import { IdGenerator } from "../services/IdGenerator";
 
 const idGenerator = new IdGenerator()
+const freightDatabase = new FreightDatabase()
 
 export class FreightBusiness {
     public createFreight = async (input: FreightInputDTO): Promise<void> => {
@@ -53,6 +54,27 @@ export class FreightBusiness {
         } catch (error: any) {
             throw new Error(error.message || error.sqlMessage);
         }
-    }  
+    }
+
+
+    public editFreight = async (input: FreightInput): Promise<void> => {
+        try {
+
+            const { id, titulo, descricao, valor, prazo, destino, origem, pontuacao, data  } = input;
+
+            const checkIfIdExists = await freightDatabase.getFreightById(id)
+
+            if (!checkIfIdExists.length) {
+                throw new Error("Frete não encontrado");
+            }
+
+            
+            await freightDatabase.editFreight(input);
+        } catch (error: any) {
+            throw new Error(error.message || error.sqlMessage);
+        }
+    }
+
+    
 
 }
