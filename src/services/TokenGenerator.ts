@@ -18,6 +18,6 @@ export class TokenGenerator {
             process.env.JWT_KEY as string
         ) as jwt.JwtPayload
 
-        return {id: payload.id as string}
+        return {cpf: payload.cpf as string}
     }
 }
