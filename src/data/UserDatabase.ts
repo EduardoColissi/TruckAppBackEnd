@@ -20,13 +20,13 @@ export class UserDatabase extends BaseDatabase {
     }
   }
 
-  public findUserByCPF = async (cpf: string) => {
+  public findUserByName = async (name: string) => {
     try {
   
       const result = await UserDatabase
         .connection(UserDatabase.TABLE_NAME)
         .select()
-        .where({cpf});
+        .where({name});
 
       return result[0];
     } catch (error: any) {
@@ -39,9 +39,9 @@ export class UserDatabase extends BaseDatabase {
 
       await UserDatabase.connection
         .insert({
-          id: user.id,
+          user_id: user.userId,
           name: user.name,
-          cpf: user.cpf,
+          user_name: user.userName,
           password: user.password
         })
         .into(UserDatabase.TABLE_NAME);

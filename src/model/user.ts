@@ -1,18 +1,18 @@
 export type userSignUpDTO = {
-   cpf: string
+   userName: string
    name: string
    password: string
 }
 
 export type userSignUp = {
-   cpf: string
+   userName: string
    name: string
    password: string
-   id: string
+   userId: string
 }
 
 export interface LoginInputDTO {
-   cpf: string,
+   userName: string,
    password: string
 }
 
