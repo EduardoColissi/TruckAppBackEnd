@@ -55,13 +55,14 @@ export class FreightController {
 
   public editFreight = async (req: Request, res: Response) => {
     try {
-      const { id } = req.params;
-      const { titulo, descricao, valor, prazo, destino, origem, pontuacao, data } = req.body;
+
+      const token = req.headers.authorization as string;
+      const {id, titulo, descricao, valor, prazo, destino, origem, pontuacao, data } = req.body;
 
       const input = {id, titulo, descricao, valor, prazo, destino, origem, pontuacao, data}
 
       const freightBusiness = new FreightBusiness();
-      await freightBusiness.editFreight(input);
+      await freightBusiness.editFreight(input, token);
     } catch (error: any) {
       
     }

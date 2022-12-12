@@ -1,9 +1,13 @@
 import { FreightDatabase } from "../data/FreightDatabase";
+import { UserDatabase } from "../data/UserDatabase";
 import { FreightInput, FreightInputDTO } from "../model/freights";
 import { IdGenerator } from "../services/IdGenerator";
+import { TokenGenerator } from "../services/TokenGenerator";
 
 const idGenerator = new IdGenerator()
 const freightDatabase = new FreightDatabase()
+const tokenGenerator = new TokenGenerator()
+const userDatabase = new UserDatabase()
 
 export class FreightBusiness {
     public createFreight = async (input: FreightInputDTO): Promise<void> => {
@@ -57,10 +61,19 @@ export class FreightBusiness {
     }
 
 
-    public editFreight = async (input: FreightInput): Promise<void> => {
+    public editFreight = async (input: FreightInput, token: string): Promise<void> => {
         try {
 
             const { id, titulo, descricao, valor, prazo, destino, origem, pontuacao, data  } = input;
+
+            const verifyToken = tokenGenerator.tokenData(token)
+            console.log(verifyToken)
+
+            const checkIfUserIdExists = await userDatabase.findUserByCPF(verifyToken.cpf)
+
+            if (!checkIfUserIdExists.length) {
+                throw new Error("Usuário não autorizado");
+            }
 
             const checkIfIdExists = await freightDatabase.getFreightById(id)
 
@@ -74,7 +87,5 @@ export class FreightBusiness {
             throw new Error(error.message || error.sqlMessage);
         }
     }
-
-    
 
 }
