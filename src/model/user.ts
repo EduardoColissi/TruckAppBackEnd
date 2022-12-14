@@ -30,5 +30,5 @@ export interface EditUserInput {
 }
 
 export interface AuthenticationData {
-   id: string
+   cpf: string
 }

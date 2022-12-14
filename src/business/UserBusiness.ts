@@ -110,7 +110,7 @@ export class UserBusiness {
         throw new InvalidPassword()
       }
 
-      const token: string = tokenGenerator.generateToken(user.id);
+      const token: string = tokenGenerator.generateToken(user.cpf);
       
       return token
     } catch (error: any) {

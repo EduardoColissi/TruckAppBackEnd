@@ -7,16 +7,17 @@ export class FreightController {
   public createFreight = async (req: Request, res: Response) => {
     try {
       const { titulo, descricao, valor, prazo, destino, origem, pontuacao, data } = req.body;
+
       const input: FreightInputDTO = {
-        titulo,
-        descricao,
-        valor,
-        prazo,
-        destino,
-        origem,
-        pontuacao,
-        data
-      };
+			titulo,
+			descricao,
+			valor,
+			prazo,
+			destino,
+			origem,
+			pontuacao,
+			data
+		};
       const freightBusiness = new FreightBusiness();
       await freightBusiness.createFreight(input);
       res.status(201).send({ message: "Frete cadastrado!" });
@@ -41,7 +42,7 @@ export class FreightController {
 
   public deleteFreight = async (req: Request, res: Response) => {
     try {
-      const { id } = req.params;
+      const { id } = req.body;
 
       const freightBusiness = new FreightBusiness();
       await freightBusiness.deleteFreight(id);
@@ -50,5 +51,24 @@ export class FreightController {
       res.status(400).send("Este frete não existe.");
     }
   };
+
+
+  public editFreight = async (req: Request, res: Response) => {
+    try {
+
+      const token = req.headers.authorization as string;
+      const {id, titulo, descricao, valor, prazo, destino, origem, pontuacao, data } = req.body;
+
+      const input = {id, titulo, descricao, valor, prazo, destino, origem, pontuacao, data}
+
+      const freightBusiness = new FreightBusiness();
+      await freightBusiness.editFreight(input, token);
+    } catch (error: any) {
+      
+    }
+  }
 }
+
+
+
 
