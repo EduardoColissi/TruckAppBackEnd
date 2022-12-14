@@ -18,9 +18,9 @@ export class UserController {
           }
 
           const userBusiness = new UserBusiness()
-          await userBusiness.createUser(input);
+          const token = await userBusiness.createUser(input);
     
-          res.status(201).send({ message: "Usuário criado!" });
+          res.status(201).send({ message: "Usuário criado!", token: token });
         } catch (error: any) {
           res.status(400).send(error.message);
         }

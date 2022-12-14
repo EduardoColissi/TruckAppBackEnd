@@ -13,7 +13,7 @@ const hashManager = new HashManager()
 
 
 export class UserBusiness {
-  public createUser = async (input: userSignUpDTO): Promise<void> => {
+  public createUser = async (input: userSignUpDTO): Promise<string> => {
     try {
       const { name, cpf, password } = input;
 
@@ -69,7 +69,11 @@ export class UserBusiness {
         password: passwordHash
       }
 
+      const token: string = tokenGenerator.generateToken(id);
+
       await userDatabase.signUp(userData);
+
+      return token
 
     } catch (error: any) {
       throw new CustomError(400, error.message);
