@@ -10,14 +10,14 @@ export class FreightDatabase extends BaseDatabase {
             await FreightDatabase.connection(FreightDatabase.TABLE_NAME)
                 .insert({
                     id: input.id,
-                    titulo: input.titulo,
-                    descricao: input.descricao,
-                    valor: input.valor,
-                    prazo: input.prazo,
-                    destino: input.destino,
-                    origem: input.origem,
-                    pontuacao: input.pontuacao,
-                    data: input.data
+                    title: input.title,
+                    description: input.description,
+                    value: input.value,
+                    deadline: input.deadline,
+                    destiny: input.destiny,
+                    origin: input.origin,
+                    points: input.points,
+                    date: input.date
                 })
         } catch (error: any) {
             throw new Error(error.message);
@@ -55,7 +55,7 @@ export class FreightDatabase extends BaseDatabase {
 
     public editFreight = async (input: FreightInput): Promise<void> => {
 
-        const { id, titulo, descricao, valor, prazo, destino, origem, pontuacao, data  } = input;
+        const { id, title, description, value, deadline, destiny, origin, points, date  } = input;
 
         const checkIfIdExists = await FreightDatabase.connection(FreightDatabase.TABLE_NAME)
         .where({id})
@@ -67,14 +67,14 @@ export class FreightDatabase extends BaseDatabase {
         await FreightDatabase.connection(FreightDatabase.TABLE_NAME)
         .where({ id })
         .update({
-            titulo: input.titulo,
-            descricao: input.descricao,
-            valor: input.valor,
-            prazo: input.prazo,
-            destino: input.destino,
-            origem: input.origem,
-            pontuacao: input.pontuacao,
-            data: input.data
+            title: input.title,
+            description: input.description,
+            value: input.value,
+            deadline: input.deadline,
+            destiny: input.destiny,
+            origin: input.origin,
+            points: input.points,
+            date: input.date
         })
     }
 

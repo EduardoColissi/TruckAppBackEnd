@@ -1,22 +1,22 @@
 export type FreightInputDTO = {
-    titulo: string
-    descricao: string
-    valor: string
-    prazo: string
-    destino: string
-    origem: string
-    pontuacao: string
-    data: string
+    title: string
+    description: string
+    value: string
+    deadline: string
+    destiny: string
+    origin: string
+    points: string
+    date: string
 }
 
 export type FreightInput = {
     id: string
-    titulo: string
-    descricao: string
-    valor: string
-    prazo: string
-    destino: string
-    origem: string
-    pontuacao: string
-    data: string
+    title: string
+    description: string
+    value: string
+    deadline: string
+    destiny: string
+    origin: string
+    points: string
+    date: string
 }

@@ -12,7 +12,7 @@ const userDatabase = new UserDatabase()
 export class FreightBusiness {
     public createFreight = async (input: FreightInputDTO): Promise<void> => {
         try {
-        if ( !input.titulo || !input.descricao || !input.valor || !input.prazo || !input.destino || !input.origem || !input.pontuacao || !input.data ) {
+        if ( !input.title || !input.description || !input.value || !input.deadline || !input.destiny || !input.origin || !input.points || !input.date ) {
             throw new Error("Preencha todos os campos");
         }
 
@@ -20,14 +20,14 @@ export class FreightBusiness {
 
         const freightData = {
             id: freightId,
-            titulo: input.titulo,
-            descricao: input.descricao,
-            valor: input.valor,
-            prazo: input.prazo,
-            destino: input.destino,
-            origem: input.origem,
-            pontuacao: input.pontuacao,
-            data: input.data
+            title: input.title,
+            description: input.description,
+            value: input.value,
+            deadline: input.deadline,
+            destiny: input.destiny,
+            origin: input.origin,
+            points: input.points,
+            date: input.date
 
         }
     
@@ -64,10 +64,9 @@ export class FreightBusiness {
     public editFreight = async (input: FreightInput, token: string): Promise<void> => {
         try {
 
-            const { id, titulo, descricao, valor, prazo, destino, origem, pontuacao, data  } = input;
+            const { id, title, description, value, deadline, destiny, origin, points, date  } = input;
 
-            const verifyToken = tokenGenerator.tokenData(token)
-            console.log(verifyToken)
+            const verifyToken = tokenGenerator.tokenData(token);
 
             const checkIfUserIdExists = await userDatabase.findUserByCPF(verifyToken.cpf)
 

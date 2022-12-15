@@ -6,17 +6,17 @@ export class FreightController {
 
   public createFreight = async (req: Request, res: Response) => {
     try {
-      const { titulo, descricao, valor, prazo, destino, origem, pontuacao, data } = req.body;
+      const { title, description, value, deadline, destiny, origin, points, date } = req.body;
 
       const input: FreightInputDTO = {
-			titulo,
-			descricao,
-			valor,
-			prazo,
-			destino,
-			origem,
-			pontuacao,
-			data
+			title,
+			description,
+			value,
+			deadline,
+			destiny,
+			origin,
+			points,
+			date
 		};
       const freightBusiness = new FreightBusiness();
       await freightBusiness.createFreight(input);
@@ -57,9 +57,9 @@ export class FreightController {
     try {
 
       const token = req.headers.authorization as string;
-      const {id, titulo, descricao, valor, prazo, destino, origem, pontuacao, data } = req.body;
+      const {id, title, description, value, deadline, destiny, origin, points, date } = req.body;
 
-      const input = {id, titulo, descricao, valor, prazo, destino, origem, pontuacao, data}
+      const input = {id, title, description, value, deadline, destiny, origin, points, date}
 
       const freightBusiness = new FreightBusiness();
       await freightBusiness.editFreight(input, token);
