@@ -3,21 +3,31 @@ import { FreightBusiness } from "../business/FreightBusiness";
 import { FreightInputDTO } from "../model/freights";
 
 export class FreightController {
-
   public createFreight = async (req: Request, res: Response) => {
     try {
-      const { title, description, value, deadline, destiny, origin, points, date } = req.body;
+      const {
+        code,
+        description,
+        value,
+        deadline,
+        destiny,
+        origin,
+        points,
+        date,
+        trucktype,
+      } = req.body;
 
       const input: FreightInputDTO = {
-			title,
-			description,
-			value,
-			deadline,
-			destiny,
-			origin,
-			points,
-			date
-		};
+        code,
+        description,
+        value,
+        deadline,
+        destiny,
+        origin,
+        points,
+        date,
+        trucktype,
+      };
       const freightBusiness = new FreightBusiness();
       await freightBusiness.createFreight(input);
       res.status(201).send({ message: "Frete cadastrado!" });
@@ -25,8 +35,6 @@ export class FreightController {
       res.status(400).send(error.message);
     }
   };
-
-
 
   public getFreights = async (req: Request, res: Response) => {
     try {
@@ -37,8 +45,6 @@ export class FreightController {
       res.status(400).send(error.message);
     }
   };
-
-
 
   public deleteFreight = async (req: Request, res: Response) => {
     try {
@@ -52,23 +58,37 @@ export class FreightController {
     }
   };
 
-
   public editFreight = async (req: Request, res: Response) => {
     try {
-
       const token = req.headers.authorization as string;
-      const {id, title, description, value, deadline, destiny, origin, points, date } = req.body;
+      const {
+        id,
+        code,
+        description,
+        value,
+        deadline,
+        destiny,
+        origin,
+        points,
+        date,
+        trucktype,
+      } = req.body;
 
-      const input = {id, title, description, value, deadline, destiny, origin, points, date}
+      const input = {
+        id,
+        code,
+        description,
+        value,
+        deadline,
+        destiny,
+        origin,
+        points,
+        date,
+        trucktype,
+      };
 
       const freightBusiness = new FreightBusiness();
       await freightBusiness.editFreight(input, token);
-    } catch (error: any) {
-      
-    }
-  }
+    } catch (error: any) {}
+  };
 }
-
-
-
-
