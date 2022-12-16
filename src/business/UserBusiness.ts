@@ -13,7 +13,7 @@ const hashManager = new HashManager()
 
 
 export class UserBusiness {
-  public createUser = async (input: userSignUpDTO): Promise<void> => {
+  public createUser = async (input: userSignUpDTO): Promise<string> => {
     try {
       const { name, cpf, password } = input;
 
@@ -27,6 +27,13 @@ export class UserBusiness {
       if (name.length < 4) {
         throw new InvalidName();
       }
+
+      // if (!cpf.includes("-") || !cpf.includes(".")) {
+      //   throw new CustomError(
+      //     400,
+      //     "Formato de CPF inválido."
+      //   )
+      // }
 
       const splitName = name.split("")
       
@@ -55,14 +62,18 @@ export class UserBusiness {
       const id: string = idGenerator.generateId()
       const passwordHash: string = await hashManager.hashGenerator(password)
 
-      const user: userSignUp = {
+      const userData: userSignUp = {
         id,
         cpf,
         name,
         password: passwordHash
       }
 
-      await userDatabase.signUp(user);
+      const token: string = tokenGenerator.generateToken(id);
+
+      await userDatabase.signUp(userData);
+
+      return token
 
     } catch (error: any) {
       throw new CustomError(400, error.message);
@@ -70,7 +81,7 @@ export class UserBusiness {
   }
 
 
-  public login = async (input: LoginInputDTO): Promise<void> => {
+  public login = async (input: LoginInputDTO): Promise<string> => {
     try {
       const { cpf, password } = input;
     
@@ -81,6 +92,12 @@ export class UserBusiness {
         );
       }
 
+      // if (!cpf.includes("-") || !cpf.includes(".")) {
+      //   throw new CustomError(
+      //     400,
+      //     "Formato de CPF inválido."
+      //   )
+      // }
       const user = await userDatabase.findUserByCPF(cpf);
 
       if (!user) {
@@ -93,8 +110,9 @@ export class UserBusiness {
         throw new InvalidPassword()
       }
 
-      await userDatabase.findUserByCPF(user.cpf)
-
+      const token: string = tokenGenerator.generateToken(user.cpf);
+      
+      return token
     } catch (error: any) {
       throw new CustomError(400, error.message);
     }
