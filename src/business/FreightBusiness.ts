@@ -21,7 +21,10 @@ export class FreightBusiness {
         !input.origin ||
         !input.points ||
         !input.date ||
-        !input.trucktype
+        !input.truckType ||
+        !input.grossWeight ||
+        !input.commodityValue ||
+        !input.customHouse
       ) {
         throw new Error("Preencha todos os campos");
       }
@@ -38,7 +41,10 @@ export class FreightBusiness {
         origin: input.origin,
         points: input.points,
         date: input.date,
-        trucktype: input.trucktype,
+        truckType: input.truckType,
+        grossWeight: input.grossWeight,
+        commodityValue: input.commodityValue,
+        customHouse: input.customHouse
       };
 
       const freightDatabase = new FreightDatabase();
@@ -82,7 +88,10 @@ export class FreightBusiness {
         origin,
         points,
         date,
-        trucktype,
+        truckType,
+        grossWeight,
+        commodityValue,
+        customHouse
       } = input;
 
       const verifyToken = tokenGenerator.tokenData(token);

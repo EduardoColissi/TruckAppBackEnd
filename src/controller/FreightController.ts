@@ -14,7 +14,10 @@ export class FreightController {
         origin,
         points,
         date,
-        trucktype,
+        truckType,
+        grossWeight,
+        commodityValue,
+        customHouse
       } = req.body;
 
       const input: FreightInputDTO = {
@@ -26,7 +29,10 @@ export class FreightController {
         origin,
         points,
         date,
-        trucktype,
+        truckType,
+        grossWeight,
+        commodityValue,
+        customHouse
       };
       const freightBusiness = new FreightBusiness();
       await freightBusiness.createFreight(input);
@@ -71,7 +77,10 @@ export class FreightController {
         origin,
         points,
         date,
-        trucktype,
+        truckType,
+        grossWeight,
+        commodityValue,
+        customHouse
       } = req.body;
 
       const input = {
@@ -84,7 +93,10 @@ export class FreightController {
         origin,
         points,
         date,
-        trucktype,
+        truckType,
+        grossWeight,
+        commodityValue,
+        customHouse
       };
 
       const freightBusiness = new FreightBusiness();

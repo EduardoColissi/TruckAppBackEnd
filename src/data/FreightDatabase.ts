@@ -16,7 +16,10 @@ export class FreightDatabase extends BaseDatabase {
         origin: input.origin,
         points: input.points,
         date: input.date,
-        trucktype: input.trucktype,
+        truckType: input.truckType,
+        grossWeight: input.grossWeight,
+        commodityValue: input.commodityValue,
+        customHouse: input.customHouse,
       });
     } catch (error: any) {
       throw new Error(error.message);
@@ -63,7 +66,10 @@ export class FreightDatabase extends BaseDatabase {
       origin,
       points,
       date,
-      trucktype,
+      truckType,
+      grossWeight,
+      commodityValue,
+      customHouse,
     } = input;
 
     const checkIfIdExists = await FreightDatabase.connection(
@@ -85,7 +91,10 @@ export class FreightDatabase extends BaseDatabase {
         origin: input.origin,
         points: input.points,
         date: input.date,
-        trucktype: input.trucktype,
+        truckType: input.truckType,
+        grossWeight: input.grossWeight,
+        commodityValue: input.commodityValue,
+        customHouse: input.customHouse,
       });
   };
 
