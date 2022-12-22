@@ -7,7 +7,10 @@ export type FreightInputDTO = {
   origin: string;
   points: string;
   date: string;
-  trucktype: string;
+  truckType: string;
+  grossWeight: number;
+  commodityValue: number;
+  customHouse: string;
 };
 
 export type FreightInput = {
@@ -20,5 +23,8 @@ export type FreightInput = {
   origin: string;
   points: string;
   date: string;
-  trucktype: string;
+  truckType: string;
+  grossWeight: number;
+  commodityValue: number;
+  customHouse: string;
 };
