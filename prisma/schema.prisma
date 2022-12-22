@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(uuid())
+  name      String
+  cpf       String     @unique
+  password  String
+  createdAt DateTime   @default(now())
+  freights  Freights[]
+
+  @@map("users")
+}
+
+model Freights {
+  id             String  @id @default(uuid())
+  code           String
+  description    String
+  value          String
+  deadline       String
+  destiny        String
+  origin         String
+  points         String
+  date           String
+  truckType      String
+  grossWeight    Decimal
+  commodityValue Decimal
+  customHouse    String
+  author         User?   @relation(fields: [authorId], references: [id])
+  authorId       String? @unique
+
+  @@map("freights")
+}

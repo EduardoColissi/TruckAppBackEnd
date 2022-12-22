@@ -1,14 +1,11 @@
 {
-   "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
-      "outDir": "./build",
-      "rootDir": "./src",
-      "removeComments": true,
-      "strict": true,
-      "noImplicitAny": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true
-   }
+  "compilerOptions": {
+    "sourceMap": true,
+    "target": "es2018",
+    "outDir": "dist",
+    "module": "commonjs",
+    "strict": true,
+    "lib": ["esnext"],
+    "esModuleInterop": true
+  }
 }
