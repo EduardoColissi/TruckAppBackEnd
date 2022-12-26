@@ -73,6 +73,23 @@ export class FreightsController {
     }
   }
 
+  async getFreightsById(req: Request, res: Response) {
+    try {
+      const { id: id } = req.params;
+
+      const freight = await prismaClient.freights.findUnique({ where: { id } });
+
+      if (!freight) {
+        return res.status(404).json({ message: "Freight Not Found" });
+      }
+
+      return res.status(201).json(freight);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Server Internal Error" });
+    }
+  }
+
   async delete(req: Request, res: Response) {
     try {
       const { id: id } = req.params;
