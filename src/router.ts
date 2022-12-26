@@ -11,8 +11,8 @@ const routes = Router();
 
 routes.post("/users/signup", userFormValidator, user.create);
 routes.post("/users/login", user.login);
-routes.get("/users/users", AuthMiddlewares, user.getAllUsers);
-routes.get("/users/user/:id", user.getUserById);
+routes.get("/users/all", user.getAllUsers);
+routes.get("/users/all/user/:id", user.getUserById);
 routes.put("/users/userUpdate/:id", user.update);
 routes.delete("/deleteUser/:id", user.delete);
 routes.get("/users/search", user.search);

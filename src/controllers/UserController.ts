@@ -11,6 +11,9 @@ type IUser = {
   name: string;
   password: string;
   cpf: string;
+  licensePlate: string;
+  vehicleType: string;
+  numCelular: string;
 };
 
 export class UserController {
@@ -30,7 +33,8 @@ export class UserController {
   }
   async create(req: Request, res: Response) {
     try {
-      const { name, cpf, password } = req.body;
+      const { name, cpf, password, licensePlate, vehicleType, numCelular } =
+        req.body;
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
@@ -54,6 +58,9 @@ export class UserController {
           name,
           password: hashPassword,
           cpf,
+          licensePlate,
+          vehicleType,
+          numCelular,
         },
       });
 

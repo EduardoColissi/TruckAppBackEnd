@@ -8,12 +8,15 @@ datasource db {
 }
 
 model User {
-  id        String     @id @default(uuid())
-  name      String
-  cpf       String     @unique
-  password  String
-  createdAt DateTime   @default(now())
-  freights  Freights[]
+  id           String     @id @default(uuid())
+  name         String
+  cpf          String     @unique
+  password     String
+  numCelular   String     @unique
+  vehicleType  String
+  licensePlate String
+  createdAt    DateTime   @default(now())
+  freights     Freights[]
 
   @@map("users")
 }
