@@ -1,34 +1,34 @@
 {
-    "name": "to-do-list",
-    "version": "1.0.0",
-    "main": "index.js",
-    "scripts": {
-        "start": "tsc && node --inspect ./build/index.js",
-        "dev": "tsnd --transpile-only --ignore-watch node_modules ./src/index.ts --listen",
-        "test": "ts-node-dev ./src/services/authenticator.ts"
-    },
-    "author": "Labenu",
-    "license": "ISC",
-    "dependencies": {
-        "bcryptjs": "^2.4.3",
-        "cors": "^2.8.5",
-        "dotenv": "^8.2.0",
-        "express": "^4.17.1",
-        "js-cpf-cnpj-validation": "^1.0.0",
-        "jsonwebtoken": "^8.5.1",
-        "knex": "^0.21.5",
-        "mysql": "^2.18.1",
-        "uuid": "^8.3.2"
-    },
-    "devDependencies": {
-        "@types/bcryptjs": "^2.4.2",
-        "@types/uuid": "^8.3.4",
-        "@types/cors": "^2.8.8",
-        "@types/express": "^4.17.8",
-        "@types/jsonwebtoken": "^8.5.8",
-        "@types/knex": "^0.16.1",
-        "@types/node": "^14.11.2",
-        "ts-node-dev": "^1.0.0-pre.63",
-        "typescript": "4.6.4"
-    }
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec ts-node src/app.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/node": "^18.11.17",
+    "nodemon": "^2.0.20",
+    "prisma": "^4.7.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.7.1",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.15",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "cpf-cnpj-validator": "^1.0.3",
+    "express": "^4.18.2",
+    "express-validator": "^6.14.2",
+    "js-cpf-cnpj-validation": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.8.0"
+  }
 }
